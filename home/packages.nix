@@ -1,0 +1,64 @@
+{ pkgs, lib, ... }:
+{
+  home.packages = with pkgs; [
+    # Shell utilities
+    fzf
+    ripgrep
+    bat
+    eza
+    fd
+    jq
+    yq-go
+    htop
+    btop
+    fastfetch
+    curl
+    wget
+    httpie
+    imagemagick
+    ffmpeg
+    gnupg
+    tree
+    unzip
+    p7zip
+    ncdu
+    tldr
+    delta        # Better git diff pager
+
+    # Git extras
+    gh
+    git-lfs
+
+    # Dev languages
+    go
+    rustup       # Manages cargo, rustfmt, clippy — do NOT also add cargo here
+    python313
+    # Node: managed by Volta (volta binary is declared below)
+    volta
+
+    # Containers (CLI only — Docker Desktop is a Homebrew cask on macOS)
+    docker-compose
+
+    # Nix tooling
+    nixpkgs-fmt
+    nil
+
+    # LSP servers and formatters for LazyVim/neovim
+    lua-language-server
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted
+    stylua
+    prettierd
+    ruff
+    black
+    gnumake
+    gcc
+
+  ] ++ lib.optionals pkgs.stdenv.isLinux [
+    xdg-utils
+    wl-clipboard
+    xclip
+  ] ++ lib.optionals pkgs.stdenv.isDarwin [
+    mas    # Mac App Store CLI
+  ];
+}
