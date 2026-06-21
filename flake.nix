@@ -14,12 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Patches home-manager app linking so Spotlight/Launchpad finds Nix-installed .app bundles
-    mac-app-util = {
-      url = "github:hraban/mac-app-util";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Declarative Catppuccin theming for home-manager modules
     catppuccin = {
       url = "github:catppuccin/nix";
@@ -27,13 +21,12 @@
     };
   };
 
-  outputs = { self, nixpkgs, nix-darwin, home-manager, mac-app-util, catppuccin, ... }: {
+  outputs = { self, nixpkgs, nix-darwin, home-manager, catppuccin, ... }: {
 
     # ── macOS (Apple Silicon) ──────────────────────────────────────────────
     darwinConfigurations."macos" = nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        mac-app-util.darwinModules.default
         ./darwin/default.nix
         home-manager.darwinModules.home-manager
         {
@@ -42,7 +35,6 @@
           home-manager.users.oneivan = import ./home/default.nix;
           home-manager.sharedModules = [
             catppuccin.homeModules.catppuccin
-            mac-app-util.homeManagerModules.default
           ];
         }
       ];
@@ -52,7 +44,7 @@
     homeConfigurations."oneivan@arch" = home-manager.lib.homeManagerConfiguration {
       pkgs = nixpkgs.legacyPackages.x86_64-linux;
       modules = [
-        catppuccin.homeManagerModules.catppuccin
+        catppuccin.homeModules.catppuccin
         ./linux/default.nix
       ];
     };

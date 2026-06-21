@@ -36,7 +36,8 @@
   # System-wide fonts (available in Font Book and all apps)
   fonts.packages = with pkgs; [
     fira-code
-    (nerdfonts.override { fonts = [ "FiraCode" "JetBrainsMono" ]; })
+    nerd-fonts.fira-code
+    nerd-fonts.jetbrains-mono
     font-awesome
     noto-fonts
     noto-fonts-cjk-sans

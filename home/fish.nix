@@ -7,22 +7,8 @@ in
   programs.fish = {
     enable = true;
 
-    plugins = [
-      {
-        name = "catppuccin-fish";
-        src = pkgs.fetchFromGitHub {
-          owner = "catppuccin";
-          repo  = "fish";
-          rev   = "b90966686068b5ebc9f80e5b90fdf8c02ee7a0b8";
-          sha256 = "sha256-ZkNFLSMJ3TkPYPuxFgmUgKrWDFi9UOJnfKSfPSfRXro=";
-        };
-      }
-    ];
-
     interactiveShellInit = ''
       set -g fish_greeting ""
-
-      fish_config theme choose "Catppuccin Macchiato"
 
       # Volta (Node version manager)
       set -gx VOLTA_HOME "$HOME/.volta"
