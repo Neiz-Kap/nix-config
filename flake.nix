@@ -41,7 +41,7 @@
           home-manager.useUserPackages = true;
           home-manager.users.oneivan = import ./home/default.nix;
           home-manager.sharedModules = [
-            catppuccin.homeManagerModules.catppuccin
+            catppuccin.homeModules.catppuccin
             mac-app-util.homeManagerModules.default
           ];
         }

@@ -5,11 +5,12 @@
     ./system-preferences.nix
   ];
 
+  system.primaryUser = "oneivan";
+
   networking.hostName = "macos";
   networking.computerName = "Neiz-Kap's Mac";
 
-  # Nix daemon + flakes
-  services.nix-daemon.enable = true;
+  # nix-darwin manages the nix daemon unconditionally; no explicit enable needed
   nix.settings = {
     experimental-features = "nix-command flakes";
     trusted-users = [ "root" "oneivan" ];
@@ -29,8 +30,8 @@
   environment.shells = [ pkgs.fish ];
   programs.fish.enable = true;
 
-  # Touch ID for sudo — edits /etc/pam.d/sudo declaratively
-  security.pam.enableSudoTouchIdAuth = true;
+  # Touch ID for sudo
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # System-wide fonts (available in Font Book and all apps)
   fonts.packages = with pkgs; [

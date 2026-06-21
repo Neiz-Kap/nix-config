@@ -5,6 +5,8 @@
     defaultEditor = true;
     viAlias       = true;
     vimAlias      = true;
+    withRuby      = false;
+    withPython3   = false;
     # No plugins here — LazyVim manages them via lazy.nvim bootstrap
   };
 
