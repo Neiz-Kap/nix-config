@@ -31,5 +31,7 @@ in
   xdg.enable = true;
   xdg.configHome = "${config.home.homeDirectory}/.config";
 
+  catppuccin.autoEnable = true;
+
   home.stateVersion = "24.11";
 }

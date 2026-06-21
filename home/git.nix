@@ -3,15 +3,12 @@
   programs.git = {
     enable = true;
 
-    userName  = "Neiz-Kap";
-    userEmail = "ivan.mehedoff@yandex.ru";
+    settings = {
+      user = {
+        name  = "Neiz-Kap";
+        email = "ivan.mehedoff@yandex.ru";
+      };
 
-    signing = {
-      key           = "E7B9FBDD06E83500";
-      signByDefault = false;
-    };
-
-    extraConfig = {
       core = {
         autocrlf = "input";
         editor   = "nvim";
@@ -36,6 +33,11 @@
 
       diff.tool = "codium";
       "difftool \"codium\"".cmd = "codium --wait --diff $LOCAL $REMOTE";
+    };
+
+    signing = {
+      key           = "E7B9FBDD06E83500";
+      signByDefault = false;
     };
 
     ignores = [

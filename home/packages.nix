@@ -45,8 +45,8 @@
 
     # LSP servers and formatters for LazyVim/neovim
     lua-language-server
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
+    typescript-language-server
+    vscode-langservers-extracted
     stylua
     prettierd
     ruff
