@@ -43,6 +43,9 @@
     nixpkgs-fmt
     nil
 
+    # Anthropic CLI
+    claude-code
+
     # LSP servers and formatters for LazyVim/neovim
     lua-language-server
     typescript-language-server
