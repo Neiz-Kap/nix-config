@@ -33,6 +33,10 @@ in
       fish_add_path "/opt/homebrew/bin"
       fish_add_path "/opt/homebrew/sbin"
 
+      # Apple CLT must come before the Nix profile so `cc` resolves to Apple
+      # clang, not Nix GCC — critical for Rust and native extension builds
+      fish_add_path "/Library/Developer/CommandLineTools/usr/bin"
+
     '' + lib.optionalString isLinux ''
       # GNOME Keyring SSH agent (Wayland / Hyprland)
       if test -S "/run/user/(id -u)/gcr/ssh"

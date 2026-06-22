@@ -60,7 +60,7 @@
     ruff
     black
     gnumake
-    gcc
+    pkgconf  # pkg-config replacement; Apple's cc comes from CLT, not Nix GCC
 
   ] ++ lib.optionals pkgs.stdenv.isLinux [
     xdg-utils
