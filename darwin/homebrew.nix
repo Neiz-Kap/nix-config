@@ -41,9 +41,6 @@
       # Communication
       "telegram"
 
-      # Containers
-      "docker"              # Docker Desktop (CLI docker comes from Nix)
-
       # Media
       "vlc"
 

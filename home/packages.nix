@@ -39,8 +39,10 @@
     # Node: managed by Volta (volta binary is declared below)
     volta
 
-    # Containers (CLI only — Docker Desktop is a Homebrew cask on macOS)
+    # Containers
+    docker          # CLI
     docker-compose
+    colima          # lightweight VM runtime (replaces Docker Desktop on macOS)
 
     # Nix tooling
     nixpkgs-fmt
