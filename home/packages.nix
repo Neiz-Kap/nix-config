@@ -29,6 +29,9 @@
     gh
     git-lfs
 
+    # Build tools
+    just
+
     # Dev languages
     go
     rustup       # Manages cargo, rustfmt, clippy — do NOT also add cargo here

@@ -20,10 +20,14 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # knownUsers is required for nix-darwin to actually apply shell/user changes
+  # to existing macOS accounts via dscl
+  users.knownUsers = [ "oneivan" ];
   users.users.oneivan = {
     name = "oneivan";
     home = "/Users/oneivan";
     shell = pkgs.fish;
+    uid  = 501;
   };
 
   # Fish must be registered as a valid login shell on macOS
