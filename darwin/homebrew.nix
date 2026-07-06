@@ -47,6 +47,7 @@
       # System utilities
       "raycast"             # Spotlight replacement with extensions
       "karabiner-elements"  # Key remapping
+      "paseo"               # Polkadot/Substrate wallet
 
       # Browsers (choose what you use; zen-browser also available via nix)
       # "arc"

@@ -48,8 +48,9 @@
     nixpkgs-fmt
     nil
 
-    # Anthropic CLI
+    # AI coding assistants
     claude-code
+    opencode
 
     # LSP servers and formatters for LazyVim/neovim
     lua-language-server
