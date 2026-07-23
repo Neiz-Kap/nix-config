@@ -11,7 +11,11 @@
     };
 
     taps = [
-      "simion/termic"  # required for the termic cask (not in homebrew/cask)
+      # Required for the termic cask (not in homebrew/cask). `trusted = true` adds
+      # `trusted: true` to this tap's Brewfile line, so `brew bundle` marks it trusted
+      # as part of the same run instead of relying on a prior interactive `brew trust`
+      # (which is keyed to a $HOME that root-context activation doesn't see).
+      { name = "simion/termic"; trusted = true; }
     ];
 
     # GUI apps as .app bundles — NOT installed via Nix (macOS integration, GPU drivers, auto-updates)
