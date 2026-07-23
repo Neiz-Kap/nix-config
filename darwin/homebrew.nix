@@ -10,14 +10,13 @@
       cleanup = "zap";
     };
 
-    taps = [
-      "homebrew/services"
-    ];
+    taps = [ ];
 
     # GUI apps as .app bundles — NOT installed via Nix (macOS integration, GPU drivers, auto-updates)
     casks = [
       # Terminal
       "kitty"
+      "tabby"
 
       # Editors
       "vscodium"
@@ -43,6 +42,10 @@
 
       # Media
       "vlc"
+      "obs"
+
+      # Remote desktop
+      "windows-app"  # RDP client for Windows/Azure VMs (rebrand of Microsoft Remote Desktop)
 
       # System utilities
       "raycast"             # Spotlight replacement with extensions
