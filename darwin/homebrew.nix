@@ -10,13 +10,16 @@
       cleanup = "zap";
     };
 
-    taps = [ ];
+    taps = [
+      "simion/termic"  # required for the termic cask (not in homebrew/cask)
+    ];
 
     # GUI apps as .app bundles — NOT installed via Nix (macOS integration, GPU drivers, auto-updates)
     casks = [
       # Terminal
       "kitty"
       "tabby"
+      "termic"
 
       # Editors
       "vscodium"
