@@ -91,22 +91,21 @@ If you clone somewhere else, update the paths in `home/fish.nix` (the `nrs`/`hms
 
 ### 5. Bootstrap nix-darwin
 
-First-time setup is a two-step process. nix-darwin's activation script must run as root, so build first, then activate separately.
-
-**Step A — build the system (no root needed, takes 15–30 min on first run):**
+`darwin-rebuild` isn't installed yet on a fresh machine, so the very first run pulls it straight from the `nix-darwin` flake input (takes 15–30 min on first run):
 
 ```sh
-cd ~/.dotfiles/nix
-nix --extra-experimental-features "nix-command flakes" build .#darwinConfigurations.macos.system
+sudo nix run nix-darwin -- switch --flake ~/.dotfiles/nix#macos
 ```
 
-**Step B — activate (requires sudo):**
+This builds the system, applies all system preferences, runs Homebrew, activates home-manager, **and** registers the build under `/nix/var/nix/profiles/system` — that registration is what lets `/run/current-system` (and your login shell) survive a reboot.
+
+For every change after this, use `darwin-rebuild` directly (see [Maintenance](#maintenance)):
 
 ```sh
-sudo ./result/activate
+sudo darwin-rebuild switch --flake ~/.dotfiles/nix#macos
 ```
 
-This creates the `/run` synthetic symlink, takes ownership of `/etc/nix/nix.conf`, applies all system preferences, runs Homebrew, and activates home-manager.
+> **Do not** use the manual `nix build .#darwinConfigurations.macos.system` + `sudo ./result/activate` two-step some older guides suggest. It activates the build directly and skips the profile-registration step above, which leaves `/nix/var/nix/profiles/system` empty — the system then fails to relink `/run/current-system` on every subsequent boot, breaking the default shell and any command that depends on `/run/current-system/sw/bin`.
 
 > You may see `warning: unknown setting 'environment.systemPackages'` during the build — this comes from the pre-existing `/etc/nix/nix.conf` and is harmless. nix-darwin replaces that file on activation.
 
@@ -211,4 +210,4 @@ You need your LazyVim config at that path before activating, or the symlink will
 
 ## Installed GUI apps (macOS, via Homebrew)
 
-`kitty` · `vscodium` · `zed` · `cursor` · `obsidian` · `onlyoffice` · `bitwarden` · `tableplus` · `bruno` · `postman` · `telegram` · `docker` · `vlc` · `raycast` · `karabiner-elements`
+`kitty` · `tabby` · `termic` · `vscodium` · `zed` · `cursor` · `obsidian` · `onlyoffice` · `bitwarden` · `tableplus` · `bruno` · `postman` · `telegram` · `docker` · `vlc` · `obs` · `windows-app` · `raycast` · `karabiner-elements`
