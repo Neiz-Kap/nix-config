@@ -54,6 +54,9 @@
       # Remote desktop
       "windows-app"  # RDP client for Windows/Azure VMs (rebrand of Microsoft Remote Desktop)
 
+      # Networking
+      "happ"  # proxy client (V2Ray/Xray-based)
+
       # System utilities
       "raycast"             # Spotlight replacement with extensions
       "karabiner-elements"  # Key remapping
