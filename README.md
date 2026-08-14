@@ -42,99 +42,11 @@ nix-config/
 
 ---
 
-## macOS — fresh install
+## macOS
 
-### 1. Install Nix
-
-Use the [Determinate Systems installer](https://determinate.systems/posts/determinate-nix-installer) — it handles macOS volumes and SIP correctly and enables flakes out of the box:
-
-```sh
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
-
-Or use the official installer from [nixos.org/download](https://nixos.org/download):
-
-```sh
-sh <(curl -L https://nixos.org/nix/install)
-```
-
-Restart your terminal after installation.
-
-### 2. Enable flakes
-
-Skip this step if you used the Determinate Systems installer — flakes are already enabled.
-
-```sh
-mkdir -p ~/.config/nix
-echo 'experimental-features = nix-command flakes' >> ~/.config/nix/nix.conf
-```
-
-### 3. Install Homebrew
-
-nix-darwin manages what is installed via Homebrew but does not install Homebrew itself.
-
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-### 4. Clone this repo
-
-The config expects to live at `~/.dotfiles/nix` — the fish abbreviations (`nrs`, `nfu`) and neovim symlink both reference `~/.dotfiles`.
-
-```sh
-mkdir -p ~/.dotfiles
-git clone https://github.com/Neiz-Kap/nix-config ~/.dotfiles/nix
-cd ~/.dotfiles/nix
-```
-
-If you clone somewhere else, update the paths in `home/fish.nix` (the `nrs`/`hms`/`nfu` abbreviations) and `home/neovim.nix` before applying.
-
-### 5. Bootstrap nix-darwin
-
-`darwin-rebuild` isn't installed yet on a fresh machine, so the very first run pulls it straight from the `nix-darwin` flake input (takes 15–30 min on first run):
-
-```sh
-sudo nix run nix-darwin -- switch --flake ~/.dotfiles/nix#macos
-```
-
-This builds the system, applies all system preferences, runs Homebrew, activates home-manager, **and** registers the build under `/nix/var/nix/profiles/system` — that registration is what lets `/run/current-system` (and your login shell) survive a reboot.
-
-For every change after this, use `darwin-rebuild` directly (see [Maintenance](#maintenance)):
-
-```sh
-sudo darwin-rebuild switch --flake ~/.dotfiles/nix#macos
-```
-
-> **Do not** use the manual `nix build .#darwinConfigurations.macos.system` + `sudo ./result/activate` two-step some older guides suggest. It activates the build directly and skips the profile-registration step above, which leaves `/nix/var/nix/profiles/system` empty — the system then fails to relink `/run/current-system` on every subsequent boot, breaking the default shell and any command that depends on `/run/current-system/sw/bin`.
-
-> You may see `warning: unknown setting 'environment.systemPackages'` during the build — this comes from the pre-existing `/etc/nix/nix.conf` and is harmless. nix-darwin replaces that file on activation.
-
-### 6. Reload your shell
-
-```sh
-exec fish
-```
-
----
-
-## macOS — what changes on activation
-
-| Setting | Value |
-|---|---|
-| Hostname | `macos` |
-| Computer name | `Neiz-Kap's Mac` |
-| Default shell | Fish (from Nix store) |
-| Touch ID for sudo | enabled |
-| Dock | auto-hide, bottom, 48 px tiles, no recents |
-| Finder | list view, path bar, status bar, show extensions |
-| Trackpad | tap to click, three-finger drag |
-| Screenshots | `~/Pictures/Screenshots` |
-| Key repeat | fast (InitialKeyRepeat 15, KeyRepeat 2) |
-| Natural scrolling | disabled |
-| Dark mode | enabled |
-| Git identity | `Neiz-Kap` / `ivan.mehedoff@yandex.ru` |
-
-> **Homebrew cleanup is set to `zap`** — any cask you installed manually that is not declared in `darwin/homebrew.nix` will be removed on activation. Add it to the file first if you want to keep it.
+Fresh-install steps, what changes on activation, the installed GUI app list,
+and the AeroSpace/SketchyBar/JankyBorders tiling setup (including manual
+permission steps and known limitations) now live in **[MACOS.md](MACOS.md)**.
 
 ---
 
@@ -208,6 +120,4 @@ You need your LazyVim config at that path before activating, or the symlink will
 
 `bat` · `eza` · `ripgrep` · `fd` · `fzf` · `jq` · `yq` · `btop` · `htop` · `fastfetch` · `delta` · `httpie` · `imagemagick` · `ffmpeg` · `gnupg` · `tree` · `ncdu` · `tldr` · `gh` · `git-lfs` · `go` · `rustup` · `python 3.13` · `volta` (Node) · `docker-compose` · `nil` · `nixpkgs-fmt` · `lua-language-server` · `typescript-language-server` · `ruff` · `black` · `stylua` · `prettierd` · `gcc` · `make`
 
-## Installed GUI apps (macOS, via Homebrew)
-
-`kitty` · `tabby` · `termic` · `vscodium` · `zed` · `cursor` · `obsidian` · `onlyoffice` · `bitwarden` · `tableplus` · `bruno` · `postman` · `telegram` · `docker` · `vlc` · `obs` · `windows-app` · `raycast` · `karabiner-elements`
+Installed macOS GUI apps and the AeroSpace tiling setup are documented in [MACOS.md](MACOS.md).

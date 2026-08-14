@@ -35,6 +35,11 @@
           home-manager.users.oneivan = import ./home/default.nix;
           home-manager.sharedModules = [
             catppuccin.homeModules.catppuccin
+            # AeroSpace tiling WM (home/aerospace.nix) — disabled for now,
+            # tiling behavior didn't match expectations and there wasn't
+            # time to iterate on it. Module file is kept, not deleted;
+            # uncomment to re-enable.
+            # ./home/aerospace.nix
           ];
         }
       ];

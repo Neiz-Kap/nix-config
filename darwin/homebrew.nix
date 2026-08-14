@@ -57,6 +57,10 @@
       # Networking
       "happ"  # proxy client (V2Ray/Xray-based)
 
+      # File managers
+      "marta"      # keyboard-driven dual-pane file manager
+      "forklift"   # dual-pane file manager + SFTP/S3/WebDAV client
+
       # System utilities
       "raycast"             # Spotlight replacement with extensions
       "karabiner-elements"  # Key remapping
